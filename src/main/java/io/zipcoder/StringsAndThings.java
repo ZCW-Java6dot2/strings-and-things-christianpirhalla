@@ -54,6 +54,7 @@ public class StringsAndThings {
      */
     public String removeString(String base, String remove){
         //split base by " "
+        // Why am I splitting this up?? Do I even need to?
         String[] words = base.split(" ");
         //iterate over the resulting array
         for (int i = 0; i < words.length; i++) {
@@ -78,8 +79,7 @@ public class StringsAndThings {
         //declare is and not counters
         Integer isCounter = 0;
         Integer notCounter = 0;
-        //we can't use string.split here
-
+        //we can't use string.split here (some of the test cases aren't sentences)
         // look for not first
         // startIndex = 0
         int startIndex = 0;
@@ -125,18 +125,26 @@ public class StringsAndThings {
      */
     public Boolean gIsHappy(String input){
         //declare boolean happyGs (false by default in case of a String with no g's?
+        Boolean happyGs = true;
         //iterate through the string
+        // this doesn't account for if g is the first character in the string...
+        for (int i = 0; i < input.length(); i++) {
             //if the char at index i is a g
-            //check to its right
-                //if that character is a g
-                    //happyGs is true
-                    //continue
+            if (input.charAt(i) == 'g') {
+                if (input.charAt(i - 1) == 'g' || input.charAt(i + 1) == 'g') {
+                    //if the char at i-1 or i+1 is g
+                    // this g is happy
+                    happyGs = true;
+                }
                 //else
-                    //check to its left
-                        //if that character is a g
-                            //happyGs is true
-                            //continue
-        return null;
+                else {
+                    // the Gs are not happy >:(
+                    happyGs = false;
+                    return happyGs;
+                }
+            }
+        }
+        return happyGs;
     }
 
 
@@ -148,6 +156,17 @@ public class StringsAndThings {
      *            countTriple("a") // Should return 0
      */
     public Integer countTriple(String input){
-        return null;
+        // declare triple counter
+        Integer tripleCounter = 0;
+        //iterate over the string until i < length - 2 (to avoid null pointer)
+        for (int i = 0; i < input.length() - 2; i++) {
+            //if the character at i+1 AND i+2 is equal to the character at i
+            char currChar = input.charAt(i);
+            if (currChar == input.charAt(i + 1) && currChar == input.charAt(i + 2)) {
+                //we have a triple
+                tripleCounter++;
+            }
+        }
+        return tripleCounter;
     }
 }
