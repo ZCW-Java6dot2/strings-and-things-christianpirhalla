@@ -34,6 +34,7 @@ public class StringsAndThings {
             }
             // if the word ends in y or z
             // we have to make sure we got a character to compare
+            // (i.e. we didn't get a "word" with no real letters in it)
             if (compChar != '\0' && (compChar == 'y' || compChar == 'z')) {
                 numWords++;
             }
@@ -53,18 +54,8 @@ public class StringsAndThings {
      *           removeString("Hello there", "x") // Should return "Hello there"
      */
     public String removeString(String base, String remove){
-        //split base by " "
-        // Why am I splitting this up?? Do I even need to?
-        String[] words = base.split(" ");
-        //iterate over the resulting array
-        for (int i = 0; i < words.length; i++) {
-            //perform String.replaceAll
-            String replaced = words[i].replaceAll(remove, "");
-            words[i] = replaced;
-        }
-        //join the strings back together
-        String joined = String.join(" ", words);
-        return joined;
+        base = base.replaceAll(remove, "");
+        return base;
     }
 
     /**
